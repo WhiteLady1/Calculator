@@ -1,31 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { newRecordInHistory } from '../..';
 
-const Keypad = (props) => {
+const Keypad = ({ setNewCount }) => {
   const [numberA, setNumberA] = useState(null);
   const [numberB, setNumberB] = useState(null);
   const [newOperator, setNewOperator] = useState('');
 
   const addNumber = (e) => {
+    const newRecord = { ...newRecordInHistory };
     if (newOperator === '') {
+      newRecord.numberA = numberA;
       numberA
         ? setNumberA(numberA + e.target.value)
         : setNumberA(e.target.value);
+    } else if (numberB === null && newOperator === '') {
+      setNewOperator(e.target.value);
+      newRecord.operator = newOperator;
     } else {
       numberB
         ? setNumberB(numberB + e.target.value)
         : setNumberB(e.target.value);
+      newRecord.numberB = numberB;
     }
+    console.log(newRecord);
   };
-  const newRecord = { ...newRecordInHistory };
-  newRecord.numberA = numberA;
-  newRecord.numberB = numberB;
-  newRecord.operator = newOperator;
-  console.log(newRecord);
-
-  const setCalculator = (data) => {
-    props.handleChange(data);
-  };
+  /* const newRecord = {
+    ...newRecordInHistory,
+    numberA: numberA,
+    numberB: numberB,
+    operator: newOperator, 
+  };*/
 
   console.log(`číslo A ${numberA}`);
   console.log(`číslo B ${numberB}`);
@@ -38,6 +42,7 @@ const Keypad = (props) => {
   const clearConsole = (e) => {
     console.log(e.target.value);
   };
+
   return (
     <div>
       <div>
@@ -83,7 +88,6 @@ const Keypad = (props) => {
         <button value={'.'} onClick={addNumber}>
           .
         </button>
-        .
         <button value={'C'} onClick={clearConsole}>
           C
         </button>
