@@ -1,9 +1,17 @@
 import React from 'react';
 
-const Console = () => {
+const Console = ({ numberA, numberB, operator, result }) => {
   return (
     <div>
-      <input type="text" readOnly />
+      {result ? (
+        <input type="text" readOnly value={result} />
+      ) : (
+        <input
+          type="text"
+          readOnly
+          value={`${numberA} ${operator} ${numberB}`}
+        />
+      )}
     </div>
   );
 };
