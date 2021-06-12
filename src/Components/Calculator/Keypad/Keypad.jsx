@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button/Button';
 
-const Keypad = (proprs) => {
+const Keypad = (props) => {
   const addNumber = (e) => {
     console.log(e.target.value);
   };

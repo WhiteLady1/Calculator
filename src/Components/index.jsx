@@ -10,14 +10,20 @@ export const dataHistory = [
   { numberA: 6, numberB: 6, operator: '*', result: 36 },
   { numberA: 25, numberB: 6, operator: '+', result: 31 },
   {
-    numberA: '123456789',
-    numberB: '987654321',
+    numberA: 123456789,
+    numberB: 987654321,
     operator: '+',
-    result: '11111111110',
+    result: 11111111110,
   },
-  { numberA: '0.816', numberB: '2', operator: '+', result: '2.816' },
+  { numberA: 0.816, numberB: 2, operator: '+', result: 2.816 },
 ];
 
+export const newRecordInHistory = {
+  numberA: null,
+  numberB: null,
+  operator: '',
+  result: null,
+};
 export const usePersistedState = (
   initialState,
   key,
