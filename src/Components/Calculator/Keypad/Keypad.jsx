@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { newRecordInHistory } from '../..';
 
-const Keypad = ({ setNewCount }) => {
+const Keypad = ({ setNewCount, setSaveResult }) => {
   const [numberA, setNumberA] = useState(null);
   const [numberB, setNumberB] = useState(null);
   const [newOperator, setNewOperator] = useState('');
@@ -47,7 +47,7 @@ const Keypad = ({ setNewCount }) => {
     setNumberA(null);
     setNumberB(null);
     setNewOperator('');
-    setResult(null);
+    //setResult(null);
   };
   const countResult = () => {
     switch (newOperator) {
