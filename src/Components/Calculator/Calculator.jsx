@@ -6,6 +6,11 @@ import { newRecordInHistory } from '..';
 
 const Calculator = () => {
   const [newCount, setNewCount] = useState(newRecordInHistory);
+  const [test, setTest] = useState({});
+  const handleChange = (entry) => {
+    setTest(entry);
+    console.log(test);
+  };
   return (
     <>
       <Console
@@ -14,7 +19,7 @@ const Calculator = () => {
         operator={newCount.operator}
         result={newCount.result}
       />
-      <Keypad />
+      <Keypad handleChange={handleChange} />
       <History />
     </>
   );
