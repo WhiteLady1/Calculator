@@ -5,42 +5,70 @@ const Keypad = ({ setNewCount }) => {
   const [numberA, setNumberA] = useState(null);
   const [numberB, setNumberB] = useState(null);
   const [newOperator, setNewOperator] = useState('');
+  const [result, setResult] = useState(null);
 
   const addNumber = (e) => {
-    const newRecord = { ...newRecordInHistory };
     if (newOperator === '') {
-      newRecord.numberA = numberA;
       numberA
         ? setNumberA(numberA + e.target.value)
         : setNumberA(e.target.value);
-    } else if (numberB === null && newOperator === '') {
-      setNewOperator(e.target.value);
-      newRecord.operator = newOperator;
     } else {
       numberB
         ? setNumberB(numberB + e.target.value)
         : setNumberB(e.target.value);
-      newRecord.numberB = numberB;
     }
-    console.log(newRecord);
   };
-  /* const newRecord = {
+  const newRecord = {
     ...newRecordInHistory,
     numberA: numberA,
     numberB: numberB,
-    operator: newOperator, 
-  };*/
+    operator: newOperator,
+    result: result,
+  };
+  console.log(newRecord);
+
+  useEffect(() => {
+    console.log(`Nově je číslo A: ${numberA}`);
+    setNewCount({ ...newRecord });
+  }, [numberA, numberB, newOperator, result]);
 
   console.log(`číslo A ${numberA}`);
   console.log(`číslo B ${numberB}`);
   console.log(`operátor ${newOperator}`);
 
   const setOperator = (e) => {
-    setNewOperator(e.target.value);
+    newOperator
+      ? console.log('operáto již nelze změnit')
+      : setNewOperator(e.target.value);
     console.log(e.target.value);
   };
-  const clearConsole = (e) => {
-    console.log(e.target.value);
+  const clearConsole = () => {
+    console.log('Restart kalkulačky');
+    setNumberA(null);
+    setNumberB(null);
+    setNewOperator('');
+    setResult(null);
+  };
+  const countResult = () => {
+    switch (newOperator) {
+      case '+':
+        setResult(Number(numberA) + Number(numberB));
+        break;
+      case '-':
+        setResult(Number(numberA) - Number(numberB));
+        break;
+      case '*':
+        setResult(Number(numberA) * Number(numberB));
+        break;
+      case '/':
+        if (numberB === '0') {
+          alert('Bohužel dle zákonů matematiky nelze dělit nulou');
+          clearConsole();
+        } else {
+          setResult(Number(numberA) / Number(numberB));
+        }
+        break;
+    }
   };
 
   return (
@@ -96,7 +124,7 @@ const Keypad = ({ setNewCount }) => {
         </button>
       </div>
       <div>
-        <button>Spočítat</button>
+        <button onClick={countResult}>Spočítat</button>
       </div>
     </div>
   );

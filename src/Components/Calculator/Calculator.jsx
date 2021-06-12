@@ -5,15 +5,19 @@ import History from './History/History';
 
 const Calculator = () => {
   const [newCount, setNewCount] = useState({});
-  console.log(newCount);
+  console.log(newCount.result);
   return (
     <>
-      <Console
-        numberA={newCount.numberA || ''}
-        numberB={newCount.numberB || ''}
-        operator={newCount.operator || ''}
-        result={newCount.result}
-      />
+      {newCount.result ? (
+        <Console result={newCount.result} />
+      ) : (
+        <Console
+          numberA={newCount.numberA || ''}
+          numberB={newCount.numberB || ''}
+          operator={newCount.operator || ''}
+        />
+      )}
+
       <Keypad setNewCount={setNewCount} />
       <History />
     </>
