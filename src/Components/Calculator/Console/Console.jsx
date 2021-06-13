@@ -1,8 +1,9 @@
 import React from 'react';
+import { ConsoleContainer } from './styled';
 
 const Console = ({ numberA, numberB, operator, result }) => {
   return (
-    <div>
+    <ConsoleContainer>
       {result ? (
         <input type="text" readOnly value={result} />
       ) : (
@@ -12,7 +13,7 @@ const Console = ({ numberA, numberB, operator, result }) => {
           value={`${numberA} ${operator} ${numberB}`}
         />
       )}
-    </div>
+    </ConsoleContainer>
   );
 };
 export default Console;

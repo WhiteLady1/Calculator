@@ -8,8 +8,8 @@ const History = () => {
     'dataHistory',
   );
   return (
-    <div>
-      Historie:
+    <>
+      <h1>Historie:</h1>
       {localStorageCalculator.map((e, i) => (
         <Record
           key={i}
@@ -19,7 +19,7 @@ const History = () => {
           result={e.result}
         />
       ))}
-    </div>
+    </>
   );
 };
 export default History;

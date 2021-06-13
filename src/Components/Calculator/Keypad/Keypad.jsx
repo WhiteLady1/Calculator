@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { newRecordInHistory } from '../..';
 import { dataHistory, usePersistedState } from '../../index';
+import {
+  KeypadContainer,
+  Button,
+  ButtonCount,
+  Operator,
+  CButton,
+} from './styled';
 
 const Keypad = ({ setNewCount }) => {
   const [localStorageCalculator, setlocalStorageCalculator] = usePersistedState(
@@ -89,59 +96,57 @@ const Keypad = ({ setNewCount }) => {
 
   return (
     <div>
-      <div>
-        <button value={1} onClick={addNumber}>
+      <KeypadContainer>
+        <Button value={1} onClick={addNumber}>
           1
-        </button>
-        <button value={2} onClick={addNumber}>
+        </Button>
+        <Button value={2} onClick={addNumber}>
           2
-        </button>
-        <button value={3} onClick={addNumber}>
+        </Button>
+        <Button value={3} onClick={addNumber}>
           3
-        </button>
-        <button value={'+'} onClick={setOperator}>
+        </Button>
+        <Operator value={'+'} onClick={setOperator}>
           +
-        </button>
-        <button value={4} onClick={addNumber}>
+        </Operator>
+        <Button value={4} onClick={addNumber}>
           4
-        </button>
-        <button value={5} onClick={addNumber}>
+        </Button>
+        <Button value={5} onClick={addNumber}>
           5
-        </button>
-        <button value={6} onClick={addNumber}>
+        </Button>
+        <Button value={6} onClick={addNumber}>
           6
-        </button>
-        <button value={'-'} onClick={setOperator}>
+        </Button>
+        <Operator value={'-'} onClick={setOperator}>
           -
-        </button>
-        <button value={7} onClick={addNumber}>
+        </Operator>
+        <Button value={7} onClick={addNumber}>
           7
-        </button>
-        <button value={8} onClick={addNumber}>
+        </Button>
+        <Button value={8} onClick={addNumber}>
           8
-        </button>
-        <button value={9} onClick={addNumber}>
+        </Button>
+        <Button value={9} onClick={addNumber}>
           9
-        </button>
-        <button value={'*'} onClick={setOperator}>
+        </Button>
+        <Operator value={'*'} onClick={setOperator}>
           *
-        </button>
-        <button value={0} onClick={addNumber}>
+        </Operator>
+        <Button value={0} onClick={addNumber}>
           0
-        </button>
-        <button value={'.'} onClick={addNumber}>
+        </Button>
+        <Button value={'.'} onClick={addNumber}>
           .
-        </button>
-        <button value={'C'} onClick={clearConsole}>
+        </Button>
+        <CButton value={'C'} onClick={clearConsole}>
           C
-        </button>
-        <button value={'/'} onClick={setOperator}>
+        </CButton>
+        <Operator value={'/'} onClick={setOperator}>
           /
-        </button>
-      </div>
-      <div>
-        <button onClick={countResult}>Spočítat</button>
-      </div>
+        </Operator>
+      </KeypadContainer>
+      <ButtonCount onClick={countResult}>Spočítat</ButtonCount>
     </div>
   );
 };
