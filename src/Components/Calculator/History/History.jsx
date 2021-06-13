@@ -3,14 +3,14 @@ import Record from './Record/Record';
 import { dataHistory, usePersistedState } from '../../index';
 
 const History = () => {
-  const [localStorageScaleList, setlocalStorageScaleList] = usePersistedState(
+  const [localStorageCalculator, setlocalStorageCalculator] = usePersistedState(
     dataHistory,
     'dataHistory',
   );
   return (
     <div>
       Historie:
-      {localStorageScaleList.map((e, i) => (
+      {localStorageCalculator.map((e, i) => (
         <Record
           key={i}
           numberA={e.numberA}

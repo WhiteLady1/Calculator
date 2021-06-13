@@ -3,7 +3,7 @@ import { newRecordInHistory } from '../..';
 import { dataHistory, usePersistedState } from '../../index';
 
 const Keypad = ({ setNewCount }) => {
-  const [localStorageScaleList, setlocalStorageScaleList] = usePersistedState(
+  const [localStorageCalculator, setlocalStorageCalculator] = usePersistedState(
     dataHistory,
     'dataHistory',
   );
@@ -80,9 +80,9 @@ const Keypad = ({ setNewCount }) => {
     console.log(`Nově je číslo A: ${numberA}`);
     setNewCount({ ...newRecord });
     if (newRecord.result !== null) {
-      const newData = [...localStorageScaleList];
+      const newData = [...localStorageCalculator];
       newData.push(newRecord);
-      setlocalStorageScaleList(newData);
+      setlocalStorageCalculator(newData);
       clearConsole();
     }
   }, [numberA, numberB, newOperator, result]);
