@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { newRecordInHistory } from '../..';
+import { dataHistory, usePersistedState } from '../../index';
 
-const Keypad = ({ setNewCount, setSaveResult }) => {
+const Keypad = ({ setNewCount }) => {
+  const [localStorageScaleList, setlocalStorageScaleList] = usePersistedState(
+    dataHistory,
+    'dataHistory',
+  );
+
   const [numberA, setNumberA] = useState(null);
   const [numberB, setNumberB] = useState(null);
   const [newOperator, setNewOperator] = useState('');
@@ -30,6 +36,12 @@ const Keypad = ({ setNewCount, setSaveResult }) => {
   useEffect(() => {
     console.log(`Nově je číslo A: ${numberA}`);
     setNewCount({ ...newRecord });
+    if (newRecord.result !== null) {
+      const newData = [...localStorageScaleList];
+      newData.push(newRecord);
+      setlocalStorageScaleList(newData);
+      clearConsole();
+    }
   }, [numberA, numberB, newOperator, result]);
 
   console.log(`číslo A ${numberA}`);
@@ -47,7 +59,7 @@ const Keypad = ({ setNewCount, setSaveResult }) => {
     setNumberA(null);
     setNumberB(null);
     setNewOperator('');
-    //setResult(null);
+    setResult(null);
   };
   const countResult = () => {
     switch (newOperator) {
