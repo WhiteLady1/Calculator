@@ -24,36 +24,19 @@ const Keypad = ({ setNewCount }) => {
         : setNumberB(e.target.value);
     }
   };
-  const newRecord = {
-    ...newRecordInHistory,
-    numberA: numberA,
-    numberB: numberB,
-    operator: newOperator,
-    result: result,
-  };
-  console.log(newRecord);
-
-  useEffect(() => {
-    console.log(`Nově je číslo A: ${numberA}`);
-    setNewCount({ ...newRecord });
-    if (newRecord.result !== null) {
-      const newData = [...localStorageScaleList];
-      newData.push(newRecord);
-      setlocalStorageScaleList(newData);
-      clearConsole();
-    }
-  }, [numberA, numberB, newOperator, result]);
-
-  console.log(`číslo A ${numberA}`);
-  console.log(`číslo B ${numberB}`);
-  console.log(`operátor ${newOperator}`);
 
   const setOperator = (e) => {
-    newOperator
-      ? console.log('operáto již nelze změnit')
-      : setNewOperator(e.target.value);
-    console.log(e.target.value);
+    if (numberA === null && e.target.value === '-') {
+      setNumberA(e.target.value);
+    } else if (numberA === null) {
+      alert('Nejprve musíš zadat číslo než vybereš početní operaci');
+    } else {
+      newOperator
+        ? console.log('operátor již nelze změnit')
+        : setNewOperator(e.target.value);
+    }
   };
+
   const clearConsole = () => {
     console.log('Restart kalkulačky');
     setNumberA(null);
@@ -74,7 +57,9 @@ const Keypad = ({ setNewCount }) => {
         break;
       case '/':
         if (numberB === '0') {
-          alert('Bohužel dle zákonů matematiky nelze dělit nulou');
+          alert(
+            'Bohužel dle zákonů matematiky nelze dělit nulou. Zkus to znovu ;)',
+          );
           clearConsole();
         } else {
           setResult(Number(numberA) / Number(numberB));
@@ -82,6 +67,25 @@ const Keypad = ({ setNewCount }) => {
         break;
     }
   };
+
+  const newRecord = {
+    ...newRecordInHistory,
+    numberA: numberA,
+    numberB: numberB,
+    operator: newOperator,
+    result: result,
+  };
+
+  useEffect(() => {
+    console.log(`Nově je číslo A: ${numberA}`);
+    setNewCount({ ...newRecord });
+    if (newRecord.result !== null) {
+      const newData = [...localStorageScaleList];
+      newData.push(newRecord);
+      setlocalStorageScaleList(newData);
+      clearConsole();
+    }
+  }, [numberA, numberB, newOperator, result]);
 
   return (
     <div>
